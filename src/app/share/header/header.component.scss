@@ -1,0 +1,13 @@
+@import "../../../styles/colors.scss";
+
+:host {
+  background: $color-black;
+  display: flex;
+  align-items: center;
+  height: 59px;
+  color: $color-white;
+  margin-bottom: 10px;
+}
+
+.header {
+}

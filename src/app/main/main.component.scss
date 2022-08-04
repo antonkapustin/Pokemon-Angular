@@ -1,0 +1,37 @@
+@import "../../styles/colors.scss";
+@import "../../styles/typography.scss";
+
+:host {
+}
+
+.main {
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 41px;
+  }
+  &__list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $color-lightgray;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  &__img {
+    width: 240px;
+    height: 240px;
+  }
+  &__box {
+    background-color: $color-white;
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
+    @extend .title__main;
+    text-align: center;
+    text-transform: capitalize;
+  }
+}

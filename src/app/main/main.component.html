@@ -1,0 +1,26 @@
+<app-header></app-header>
+<div class="main__content" *ngIf="loading$ | async as state; else items">
+  <app-spiner></app-spiner>
+</div>
+<ng-template #items>
+  <ul class="main__list">
+    <li class="main__list-item" *ngFor="let item of pokemons$ | async">
+      <img
+        src="https://unpkg.com/pokeapi-sprites@2.0.4/sprites/pokemon/other/dream-world/{{
+          item.id
+        }}.svg"
+        [alt]="item.name"
+        class="main__img"
+      />
+      <div class="main__box">
+        <span class="main__title">{{ item.name }}</span>
+        <span class="main__text">Abilities</span>
+        <ul class="main_sublist">
+          <li class="main__sublist-item" *ngFor="let item of item.types">
+            <span class="main__text">{{ item.type.name }}</span>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</ng-template>
