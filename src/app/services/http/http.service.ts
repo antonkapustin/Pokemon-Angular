@@ -54,7 +54,6 @@ export class HttpService {
             pokemons.push(value);
           });
         });
-        console.log(response);
         this.updateItems(pokemons);
         return response;
       }),

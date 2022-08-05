@@ -28,7 +28,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   public onGoTo(page: number): void {
     this.currentPage = page;
-    this.currentOffset = 20 * page;
+    this.currentOffset = 20 * (page - 1);
     this.httpService
       .loadPokemons(this.api + this.currentOffset)
       .pipe(take(1))
