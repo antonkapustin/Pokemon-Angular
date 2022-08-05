@@ -6,21 +6,26 @@
   <ul class="main__list">
     <li class="main__list-item" *ngFor="let item of pokemons$ | async">
       <img
-        src="https://unpkg.com/pokeapi-sprites@2.0.4/sprites/pokemon/other/dream-world/{{
-          item.id
-        }}.svg"
+        [src]="item.sprites.front_default"
         [alt]="item.name"
         class="main__img"
       />
       <div class="main__box">
         <span class="main__title">{{ item.name }}</span>
-        <span class="main__text">Abilities</span>
+        <span class="main__text">Abilities:</span>
         <ul class="main_sublist">
           <li class="main__sublist-item" *ngFor="let item of item.types">
-            <span class="main__text">{{ item.type.name }}</span>
+            <span class="main__text_list">{{ item.type.name }}</span>
           </li>
         </ul>
       </div>
     </li>
   </ul>
 </ng-template>
+<app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (goTo)="onGoTo($event)"
+  (next)="onNext($event)"
+  (previous)="onPrevious($event)"
+></app-pagination>

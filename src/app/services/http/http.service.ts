@@ -8,8 +8,6 @@ import {
   map,
   Observable,
   of,
-  Subscription,
-  switchMap,
 } from "rxjs";
 
 export interface Pokemon {
@@ -23,6 +21,11 @@ export interface Pokemon {
       url: string;
     };
   }[];
+  sprites: {
+    back_default: string;
+    front_default: string;
+    front_shiny: string;
+  };
 }
 
 interface api {
@@ -38,20 +41,20 @@ interface api {
 export class HttpService {
   pokemons$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private api: string = " https://pokeapi.co/api/v2/pokemon?limit=20&offset=0";
+
   constructor(private http: HttpClient) {}
 
-  loadPokemons(): Observable<api> {
+  loadPokemons(api: string): Observable<any> {
     this.loading$.next(true);
-    const pokemons = this.http.get<api>(this.api).pipe(
+    const pokemons = this.http.get<api>(api).pipe(
       map((response) => {
         let pokemons: any[] = [];
         response.results.forEach((value) => {
           this.http.get(value.url).subscribe((value) => {
             pokemons.push(value);
-            return;
           });
         });
+        console.log(response);
         this.updateItems(pokemons);
         return response;
       }),

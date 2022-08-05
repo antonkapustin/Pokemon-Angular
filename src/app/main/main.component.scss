@@ -9,6 +9,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 41px;
+    margin-bottom: 50px;
   }
   &__list-item {
     display: flex;
@@ -19,7 +20,6 @@
     overflow: hidden;
   }
   &__img {
-    width: 240px;
     height: 240px;
   }
   &__box {
@@ -28,10 +28,24 @@
     margin-top: auto;
     display: flex;
     flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    max-height: 33%;
+    height: 100%;
   }
   &__title {
     @extend .title__main;
     text-align: center;
     text-transform: capitalize;
+  }
+  &__sublist {
+  }
+  &__sublist-item {
+    &::before {
+      content: "-";
+    }
+  }
+  &__text {
+    @extend .text__main;
   }
 }

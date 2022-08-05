@@ -1,0 +1,37 @@
+<ul class="pagination__list">
+  <li class="pagination__list-item">
+    <button
+      class="pagination__button"
+      type="button"
+      [disabled]="currentPage === 1"
+      (click)="onPrevious()"
+    >
+      Prev
+    </button>
+  </li>
+  <li class="pagination__list-item" *ngFor="let page of renderPages">
+    <ng-container *ngIf="page > 0; else templateA">
+      <button
+        class="pagination__button"
+        type="button"
+        [class.pagination__button_active]="page === currentPage"
+        (click)="onGoTo(page)"
+      >
+        <span class="pagination__text">{{ page }}</span>
+      </button>
+    </ng-container>
+    <ng-template #templateA>
+      <span class="pagination__text">...</span>
+    </ng-template>
+  </li>
+  <li class="pagination__list-item">
+    <button
+      class="pagination__button"
+      type="button"
+      [disabled]="currentPage === totalPages"
+      (click)="onNext()"
+    >
+      Next
+    </button>
+  </li>
+</ul>
