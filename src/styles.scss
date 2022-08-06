@@ -1,6 +1,7 @@
 @import "./styles/colors.scss";
 @import "./styles/mixins.scss";
 @import "./styles/typography.scss";
+@import "./styles/media.scss";
 
 html,
 body {
@@ -22,6 +23,7 @@ select {
   font: inherit;
   outline: 0;
   outline-offset: 0;
+  border: none;
 }
 
 button {

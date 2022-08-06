@@ -1,5 +1,6 @@
 @import "../../styles/colors.scss";
 @import "../../styles/typography.scss";
+@import "../../styles/media.scss";
 
 :host {
 }
@@ -7,9 +8,15 @@
 .main {
   &__list {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-gap: 41px;
     margin-bottom: 50px;
+    @include media-medium {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include media-large {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
   &__list-item {
     display: flex;

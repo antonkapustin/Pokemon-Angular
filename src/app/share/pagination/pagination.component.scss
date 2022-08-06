@@ -1,5 +1,6 @@
 @import "../../../styles/colors.scss";
 @import "../../../styles/typography.scss";
+@import "../../../styles/media.scss";
 
 :host {
 }
@@ -11,13 +12,20 @@
     justify-content: center;
   }
   &__list-item {
-    margin-right: 10px;
+    margin-right: 5px;
+    @include media-medium {
+      margin-right: 10px;
+    }
   }
   &__button {
     background-color: $color-black;
     border-radius: 8px;
     color: $color-white;
-    padding: 10px 15px;
+    padding: 6px 10px;
+    @include media-medium {
+      padding: 10px 15px;
+    }
+
     &_active {
       background-color: $color-red;
       filter: drop-shadow(2px 4px 6px $color-black);
