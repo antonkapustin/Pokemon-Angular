@@ -21,9 +21,9 @@ export class LoginPageComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
-    // if (this.authService.isLoggedIn()) {
-    //   this.router.navigate(["main"]);
-    // }
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(["main"]);
+    }
   }
   onSubmit() {
     let data = this.loginForm.value;
