@@ -1,18 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  constructor(private router: Router) {}
-
   setToken(token: string): void {
-    localStorage.setItem("key", token);
+    localStorage.setItem("auth", token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem("key");
+    return localStorage.getItem("auth");
   }
 
   isLoggedIn(): boolean {

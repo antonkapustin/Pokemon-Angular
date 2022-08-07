@@ -11,6 +11,9 @@
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 41px;
     margin-bottom: 50px;
+    box-sizing: border-box;
+    padding: 0px 15px;
+
     @include media-medium {
       grid-template-columns: repeat(2, 1fr);
     }

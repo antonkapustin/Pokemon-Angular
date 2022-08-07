@@ -30,7 +30,12 @@
       >Forgot <a href="#" class="login__link">Email/ Password</a></span
     >
     <span class="login__text"
-      >Create ac account? <a href="#" class="login__link">Sign Up</a></span
+      >Create an account?
+      <a routerLink="../signUp" class="login__link">Sign Up</a></span
     >
   </form>
 </div>
+
+<ng-container *ngIf="alert">
+  <app-alert [text]="text"></app-alert>
+</ng-container>

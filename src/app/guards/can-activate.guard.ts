@@ -29,5 +29,6 @@ export class CanActivateGuard implements CanActivate {
     } else {
       return true;
     }
+    return true;
   }
 }

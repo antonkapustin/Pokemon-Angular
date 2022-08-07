@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
 }
-.login {
+.signUp {
   &__box {
     display: flex;
     width: 100%;
@@ -64,5 +64,8 @@
   }
   &__invalid-box {
     padding: 10px 0;
+  }
+  &__label {
+    margin-top: 20px;
   }
 }
