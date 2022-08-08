@@ -4,16 +4,23 @@
 </div>
 <ng-template #items>
   <ul class="main__list">
-    <li class="main__list-item" *ngFor="let item of pokemons$ | async">
-      <img
-        [src]="item.sprites.front_default"
-        [alt]="item.name"
-        class="main__img"
-      />
+    <li
+      class="main__list-item main__type_{{ item.types[0].type.name }}"
+      *ngFor="let item of pokemons$ | async"
+    >
+      <div class="main__img-box">
+        <img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{
+            item.id
+          }}.png"
+          [alt]="item.name"
+          class="main__img"
+        />
+      </div>
+
       <div class="main__box">
         <span class="main__title">{{ item.name }}</span>
-        <span class="main__text">Abilities:</span>
-        <ul class="main_sublist">
+        <ul class="main__sublist">
           <li class="main__sublist-item" *ngFor="let item of item.types">
             <span class="main__text_list">{{ item.type.name }}</span>
           </li>

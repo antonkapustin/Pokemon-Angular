@@ -17,45 +17,87 @@
     @include media-medium {
       grid-template-columns: repeat(2, 1fr);
     }
-    @include media-large {
-      grid-template-columns: repeat(4, 1fr);
+    @include media-extra-large {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   &__list-item {
     display: flex;
-    flex-direction: column;
     align-items: center;
     background-color: $color-lightgray;
     border-radius: 8px;
     overflow: hidden;
   }
+  &__img-box {
+    position: relative;
+    padding-right: 150px;
+    padding-bottom: 150px;
+    @include media-medium {
+      padding-right: 250px;
+      padding-bottom: 250px;
+    }
+  }
   &__img {
-    height: 240px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
   &__box {
-    background-color: $color-white;
-    width: 100%;
-    margin-top: auto;
     display: flex;
     flex-direction: column;
-    padding: 10px;
     box-sizing: border-box;
-    max-height: 33%;
     height: 100%;
+    @include media-medium {
+      align-items: center;
+      justify-content: center;
+    }
   }
   &__title {
     @extend .title__main;
-    text-align: center;
+    margin-bottom: 5px;
     text-transform: capitalize;
   }
   &__sublist {
+    display: flex;
+    flex-direction: column;
+    @include media-medium {
+      flex-direction: row;
+    }
   }
   &__sublist-item {
-    &::before {
-      content: "-";
-    }
+    border: 1px solid $color-white;
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-right: 15px;
+    margin-bottom: 10px;
   }
   &__text {
     @extend .text__main;
+  }
+  &__type {
+    &_fire {
+      background-color: $color-orange;
+    }
+    &_water {
+      background-color: $color-blue2;
+    }
+    &_grass {
+      background-color: $color-green;
+    }
+    &_bug {
+      background-color: $color-green;
+    }
+    &_electric {
+      background-color: $color-yellow;
+    }
+    &_poison {
+      background-color: $color-purple;
+    }
+    &_ground {
+      background-color: $color-broune;
+    }
   }
 }

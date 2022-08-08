@@ -18,11 +18,13 @@ export class MainComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
-    let subscription1 = this.httpService
+    this.httpService
       .loadPokemons(this.api + this.currentOffset)
       .pipe(take(1))
       .subscribe();
-    let subscription2 = this.pokemons$.pipe().subscribe();
+    let subscription2 = this.pokemons$
+      .pipe()
+      .subscribe((value) => console.log(value));
     this.subscriptions.push(subscription2);
   }
 
