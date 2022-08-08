@@ -49,3 +49,27 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+.type {
+  &_fire {
+    background-color: $color-orange !important;
+  }
+  &_water {
+    background-color: $color-blue2 !important;
+  }
+  &_grass {
+    background-color: $color-green !important;
+  }
+  &_bug {
+    background-color: $color-green !important;
+  }
+  &_electric {
+    background-color: $color-yellow !important;
+  }
+  &_poison {
+    background-color: $color-purple !important;
+  }
+  &_ground {
+    background-color: $color-broune !important;
+  }
+}

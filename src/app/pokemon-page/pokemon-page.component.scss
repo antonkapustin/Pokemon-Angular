@@ -1,0 +1,119 @@
+@import "../../styles/colors.scss";
+@import "../../styles/typography.scss";
+@import "../../styles/media.scss";
+
+:host {
+}
+
+.pokemon {
+  &__header {
+    background-color: $color-lightgray;
+    position: relative;
+  }
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  &__box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-bottom: 20px;
+    grid-gap: 120px;
+    &_bordered {
+      border: 1px solid $color-black;
+      padding: 30px;
+      margin-bottom: 50px;
+    }
+  }
+  &__discription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  &__title {
+    @extend .title__huge;
+  }
+  &__list {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 15px;
+    &_types {
+      align-items: center;
+      @include media-medium {
+        flex-direction: row;
+      }
+
+      & > .pokemon__list-item {
+        border: 1px solid $color-white;
+        border-radius: 8px;
+        padding: 5px 10px;
+        margin-right: 15px;
+        margin-bottom: 10px;
+      }
+    }
+    &_stats {
+      & > .pokemon__list-item {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+      }
+    }
+    &_abilities {
+      & > .pokemon__list-item {
+        padding: 10px 0;
+        margin-bottom: 10px;
+        border-bottom: 1px solid $color-black;
+      }
+    }
+  }
+  &__list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid $color-white;
+  }
+  &__text {
+    @extend .text__main;
+    &_big {
+      @extend .text__big;
+    }
+  }
+  &__img-box {
+    position: relative;
+    padding-bottom: 150px;
+    @include media-medium {
+      padding-bottom: 450px;
+    }
+  }
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    max-height: 100%;
+  }
+  &__stats {
+    margin-top: 40px;
+  }
+  &__buttons {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 40px;
+    box-sizing: border-box;
+  }
+  &__button {
+    padding: 10px 30px;
+    background: none;
+    border: 1px solid $color-white;
+    border-radius: 16px;
+    z-index: 10;
+    &:hover {
+      background-color: $color-black;
+      color: $color-white;
+    }
+  }
+}

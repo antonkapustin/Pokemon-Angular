@@ -12,8 +12,33 @@ import {
 
 export interface Pokemon {
   type: string;
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+      is_hidden: boolean;
+      slot: number;
+    };
+  }[];
+  moves: {
+    move: {
+      name: string;
+      url: string;
+    };
+  }[];
   name: string;
+  base_experience: number;
+  height: number;
+  weight: number;
   id: string;
+  stats: {
+    base_stat: number;
+    efford: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
   types: {
     slot: number;
     type: {

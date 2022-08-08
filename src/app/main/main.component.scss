@@ -13,6 +13,7 @@
     margin-bottom: 50px;
     box-sizing: border-box;
     padding: 0px 15px;
+    margin-top: 10px;
 
     @include media-medium {
       grid-template-columns: repeat(2, 1fr);
@@ -27,6 +28,7 @@
     background-color: $color-lightgray;
     border-radius: 8px;
     overflow: hidden;
+    cursor: pointer;
   }
   &__img-box {
     position: relative;
@@ -76,28 +78,5 @@
   }
   &__text {
     @extend .text__main;
-  }
-  &__type {
-    &_fire {
-      background-color: $color-orange;
-    }
-    &_water {
-      background-color: $color-blue2;
-    }
-    &_grass {
-      background-color: $color-green;
-    }
-    &_bug {
-      background-color: $color-green;
-    }
-    &_electric {
-      background-color: $color-yellow;
-    }
-    &_poison {
-      background-color: $color-purple;
-    }
-    &_ground {
-      background-color: $color-broune;
-    }
   }
 }

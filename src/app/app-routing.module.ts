@@ -21,6 +21,13 @@ const routes: Routes = [
         (m) => m.SignUpPageModule
       ),
   },
+  {
+    path: "pokemon/:name",
+    loadChildren: () =>
+      import("./pokemon-page/pokemon-page.module").then(
+        (m) => m.PokemonPageModule
+      ),
+  },
 ];
 
 @NgModule({

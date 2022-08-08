@@ -1,0 +1,32 @@
+@import "../../../styles/colors.scss";
+
+:host {
+}
+.bar {
+  &__box {
+    height: 30px;
+    width: 100%;
+    background-color: $color-lightgray;
+    overflow: hidden;
+  }
+  &__text {
+    color: $color-white;
+  }
+  &__progress {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(
+      45deg,
+      hsla(0, 0%, 100%, 0.15) 25%,
+      transparent 0,
+      transparent 50%,
+      hsla(0, 0%, 100%, 0.15) 0,
+      hsla(0, 0%, 100%, 0.15) 75%,
+      transparent 0,
+      transparent
+    );
+    background-size: 1rem 1rem;
+  }
+}
