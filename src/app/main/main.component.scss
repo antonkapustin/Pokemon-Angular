@@ -32,10 +32,9 @@
   }
   &__img-box {
     position: relative;
-    padding-right: 150px;
-    padding-bottom: 150px;
-    @include media-medium {
-      padding-right: 250px;
+    padding-bottom: 180px;
+    width: 50%;
+    @include media-large {
       padding-bottom: 250px;
     }
   }
@@ -50,11 +49,11 @@
   &__box {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     box-sizing: border-box;
     height: 100%;
     @include media-medium {
       align-items: center;
-      justify-content: center;
     }
   }
   &__title {
