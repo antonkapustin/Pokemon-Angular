@@ -40,6 +40,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
   }
   &__title {
     @extend .title__huge;
@@ -90,7 +91,7 @@
   }
   &__img-box {
     position: relative;
-    padding-bottom: 400px;
+    padding-bottom: 310px;
     width: 100%;
     overflow: hidden;
     @include media-large {
@@ -117,7 +118,7 @@
     box-sizing: border-box;
 
     @include media-large {
-      position: absolute;
+      // position: absolute;
       padding: 30px 40px;
     }
   }
