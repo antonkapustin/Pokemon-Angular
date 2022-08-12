@@ -41,13 +41,13 @@ export class PaginationComponent implements OnChanges {
     return [1, 2, 3, 4, 5, -1, total];
   }
 
-  public onGoTo(page: number): void {
+  onGoTo(page: number): void {
     this.goTo.emit(page);
   }
-  public onNext(): void {
+  onNext(): void {
     this.next.emit(this.currentPage);
   }
-  public onPrevious(): void {
+  onPrevious(): void {
     this.previous.next(this.currentPage);
   }
 }

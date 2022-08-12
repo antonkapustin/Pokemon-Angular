@@ -11,6 +11,7 @@ import { AuthService } from "../services/authorization/auth.service";
 export class SignUpPageComponent {
   signUpForm = new FormGroup({
     name: new FormControl("", Validators.required),
+    gender: new FormControl("", Validators.required),
     email: new FormControl("", [Validators.required, Validators.email]),
     password: new FormControl("", [
       Validators.required,

@@ -2,7 +2,8 @@
   class="input__field"
   [type]="type"
   [placeholder]="type"
-  [formControl]="input"
+  [(ngModel)]="value"
+  (ngModelChange)="onChange(value)"
 />
 <span class="input__focus input__focus_top"></span>
 <span class="input__focus input__focus_bottom"></span>

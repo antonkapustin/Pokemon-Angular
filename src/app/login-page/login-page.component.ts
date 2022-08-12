@@ -43,14 +43,7 @@ export class LoginPageComponent implements OnInit {
   }
   onSubmit() {
     let data = this.loginForm.value;
-    let user = {} as user;
-    let value = this.authService.getToken();
-    if (value) {
-      user = JSON.parse(value);
-    } else {
-      this.onAlert();
-      this.text = "you dont have account";
-    }
+    let user = this.authService.getToken();
 
     if (user.email != data.email) {
       this.text = "You dont have accout or wrong email";

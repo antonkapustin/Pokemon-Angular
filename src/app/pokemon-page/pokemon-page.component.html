@@ -1,78 +1,83 @@
 <app-header></app-header>
-<div class=" type_{{ pokemon.types[0].type.name }} pokemon__header ">
-  <div class="pokemon__buttons">
-    <button class="pokemon__button" type="button" (click)="onNavigateBack()">
-      <span class="pokemon__text">Back</span>
-    </button>
-    <button class="pokemon__button" type="button">
-      <span class="pokemon__text">Add to Pokedex</span>
-    </button>
+<div class="pokemon__content" *ngIf="loading$ | async as state; else main">
+  <app-spiner class="pokemon__spiner"></app-spiner>
+</div>
+<ng-template #main>
+  <div class=" type_{{ pokemon.types[0].type.name }} pokemon__header ">
+    <div class="pokemon__buttons">
+      <button class="pokemon__button" type="button" (click)="onNavigateBack()">
+        <span class="pokemon__text">Back</span>
+      </button>
+      <button class="pokemon__button" type="button" (click)="addToPokedex()">
+        <span class="pokemon__text">Add to Pokedex</span>
+      </button>
+    </div>
+    <div class="pokemon__box pokemon__container">
+      <div class="pokemon__discription">
+        <span class="pokemon__title">{{ pokemon.name | titlecase }}</span>
+        <ul class="pokemon__list pokemon__list_types">
+          <li class="pokemon__list-item" *ngFor="let item of pokemon.types">
+            <span class="pokemon__text">{{ item.type.name }}</span>
+          </li>
+        </ul>
+        <ul class="pokemon__list">
+          <li class="pokemon__list-item">
+            <span class="pokemon__text">Expirience</span>
+            <span class="pokemon__text">{{ pokemon.base_experience }}</span>
+          </li>
+          <li class="pokemon__list-item">
+            <span class="pokemon__text">Height</span>
+            <span class="pokemon__text">{{ pokemon.height }}</span>
+          </li>
+          <li class="pokemon__list-item">
+            <span class="pokemon__text">Weight</span>
+            <span class="pokemon__text">{{ pokemon.weight }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="pokemon__img-box">
+        <img
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{
+            pokemon.id
+          }}.png"
+          [alt]="pokemon.name"
+          class="pokemon__img"
+        />
+      </div>
+    </div>
   </div>
-  <div class="pokemon__box pokemon__container">
-    <div class="pokemon__discription">
-      <span class="pokemon__title">{{ pokemon.name | titlecase }}</span>
-      <ul class="pokemon__list pokemon__list_types">
-        <li class="pokemon__list-item" *ngFor="let item of pokemon.types">
-          <span class="pokemon__text">{{ item.type.name }}</span>
-        </li>
-      </ul>
-      <ul class="pokemon__list">
-        <li class="pokemon__list-item">
-          <span class="pokemon__text">Expirience</span>
-          <span class="pokemon__text">{{ pokemon.base_experience }}</span>
-        </li>
-        <li class="pokemon__list-item">
-          <span class="pokemon__text">Height</span>
-          <span class="pokemon__text">{{ pokemon.height }}</span>
-        </li>
-        <li class="pokemon__list-item">
-          <span class="pokemon__text">Weight</span>
-          <span class="pokemon__text">{{ pokemon.weight }}</span>
+  <div class="pokemon__container">
+    <div class="pokemon__stats pokemon__box_bordered">
+      <span class="pokemon__title">Stats</span>
+      <ul class="pokemon__list pokemon__list_stats">
+        <li class="pokemon__list-item" *ngFor="let item of pokemon.stats">
+          <span class="pokemon__text">{{ item.stat.name | titlecase }}</span>
+          <app-progress-bar
+            [value]="item.base_stat"
+            [type]="pokemon.types[0].type.name"
+          ></app-progress-bar>
         </li>
       </ul>
     </div>
-    <div class="pokemon__img-box">
-      <img
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{
-          pokemon.id
-        }}.png"
-        [alt]="pokemon.name"
-        class="pokemon__img"
-      />
+    <div class="pokemon__box_bordered pokemon__abilites">
+      <span class="pokemon__title">Abilities</span>
+      <ul class="pokemon__list pokemon__list_abilities">
+        <li class="pokemon__list-item" *ngFor="let item of pokemon.abilities">
+          <span class="pokemon__text pokemon__text_big">{{
+            item.ability.name | titlecase
+          }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="pokemon__box_bordered pokemon__moves">
+      <span class="pokemon__title">Moves</span>
+      <ul class="pokemon__list pokemon__list_abilities">
+        <li class="pokemon__list-item" *ngFor="let item of pokemon.moves">
+          <span class="pokemon__text pokemon__text_big">{{
+            item.move.name | titlecase
+          }}</span>
+        </li>
+      </ul>
     </div>
   </div>
-</div>
-<div class="pokemon__container">
-  <div class="pokemon__stats pokemon__box_bordered">
-    <span class="pokemon__title">Stats</span>
-    <ul class="pokemon__list pokemon__list_stats">
-      <li class="pokemon__list-item" *ngFor="let item of pokemon.stats">
-        <span class="pokemon__text">{{ item.stat.name | titlecase }}</span>
-        <app-progress-bar
-          [value]="item.base_stat"
-          [type]="pokemon.types[0].type.name"
-        ></app-progress-bar>
-      </li>
-    </ul>
-  </div>
-  <div class="pokemon__box_bordered pokemon__abilites">
-    <span class="pokemon__title">Abilities</span>
-    <ul class="pokemon__list pokemon__list_abilities">
-      <li class="pokemon__list-item" *ngFor="let item of pokemon.abilities">
-        <span class="pokemon__text pokemon__text_big">{{
-          item.ability.name | titlecase
-        }}</span>
-      </li>
-    </ul>
-  </div>
-  <div class="pokemon__box_bordered pokemon__moves">
-    <span class="pokemon__title">Moves</span>
-    <ul class="pokemon__list pokemon__list_abilities">
-      <li class="pokemon__list-item" *ngFor="let item of pokemon.moves">
-        <span class="pokemon__text pokemon__text_big">{{
-          item.move.name | titlecase
-        }}</span>
-      </li>
-    </ul>
-  </div>
-</div>
+</ng-template>

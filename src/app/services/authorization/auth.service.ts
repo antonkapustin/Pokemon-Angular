@@ -1,5 +1,12 @@
 import { Injectable } from "@angular/core";
 
+export interface trainer {
+  name: string;
+  gender: string;
+  email: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -8,11 +15,16 @@ export class AuthService {
     localStorage.setItem("auth", token);
   }
 
-  getToken(): string | null {
-    return localStorage.getItem("auth");
+  getToken(): trainer {
+    let token = localStorage.getItem("auth");
+    if (token) {
+      return JSON.parse(token);
+    } else {
+      return { name: "", gender: "", email: "", password: "" };
+    }
   }
 
   isLoggedIn(): boolean {
-    return this.getToken() !== null;
+    return localStorage.getItem("auth") !== null;
   }
 }

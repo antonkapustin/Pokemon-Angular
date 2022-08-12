@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { HttpService, Pokemon } from "../services/http/http.service";
 import { Location } from "@angular/common";
+import { PokedexService } from "../services/pokedex/pokedex.service";
 
 @Component({
   selector: "app-pokemon-page",
@@ -11,23 +12,25 @@ import { Location } from "@angular/common";
 })
 export class PokemonPageComponent implements OnInit {
   pokemons$: BehaviorSubject<Pokemon[]> = this.httpService.getItems$();
-  pokemon: Pokemon = this.onFilter();
+  pokemon!: Pokemon;
+  loading$: BehaviorSubject<boolean> = this.httpService.getLoadingState();
   constructor(
     private httpService: HttpService,
     private router: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private pokedex: PokedexService
   ) {}
 
-  ngOnInit(): void {}
-  onFilter(): Pokemon {
-    let data = this.pokemons$.getValue();
-    let param = this.router.snapshot.params["name"];
-    let pokemon = data.filter((item) => {
-      return item.name === param;
-    });
-    return pokemon[0];
+  ngOnInit(): void {
+    let id = this.router.snapshot.params["id"];
+    this.httpService
+      .loadPokemon(id)
+      .subscribe((value) => (this.pokemon = value));
   }
   onNavigateBack() {
     this.location.back();
+  }
+  addToPokedex() {
+    this.pokedex.addPokemons(this.pokemon);
   }
 }

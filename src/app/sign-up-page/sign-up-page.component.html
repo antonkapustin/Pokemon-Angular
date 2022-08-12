@@ -9,6 +9,34 @@
     <div class="signUp__invalid-box" *ngIf="signUpForm.get('name')?.invalid">
       <span class="signUp__text signUp__text_form">Should not be empty</span>
     </div>
+    <div class="signUp__gender">
+      <label class="signUp__label">
+        <input
+          type="radio"
+          name="gender"
+          value="male"
+          formControlName="gender"
+        />
+        <span
+          class="signUp__text"
+          [class.signUp__text_form]="signUpForm.get('gender')?.invalid"
+          >Male</span
+        >
+      </label>
+      <label class="signUp__label">
+        <input
+          type="radio"
+          name="gender"
+          value="female"
+          formControlName="gender"
+        />
+        <span
+          class="signUp__text"
+          [class.signUp__text_form]="signUpForm.get('gender')?.invalid"
+          >Female</span
+        >
+      </label>
+    </div>
     <app-input
       type="email"
       class="signUp__form-element"

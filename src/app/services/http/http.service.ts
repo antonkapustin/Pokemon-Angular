@@ -5,9 +5,11 @@ import {
   BehaviorSubject,
   catchError,
   finalize,
+  forkJoin,
   map,
   Observable,
   of,
+  switchMap,
 } from "rxjs";
 
 export interface Pokemon {
@@ -69,18 +71,14 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
-  loadPokemons(api: string): Observable<any> {
+  loadPokemonsArray(api: string): Observable<any> {
     this.loading$.next(true);
     const pokemons = this.http.get<api>(api).pipe(
-      map((response) => {
-        let pokemons: any[] = [];
-        response.results.forEach((value) => {
-          this.http.get(value.url).subscribe((value) => {
-            pokemons.push(value);
-          });
+      switchMap((response: api) => {
+        const observ = response.results.map((value) => {
+          return this.http.get(value.url);
         });
-        this.updateItems(pokemons);
-        return response;
+        return forkJoin(observ);
       }),
       catchError(this.handleError<api>("getApi")),
       finalize(() => this.loading$.next(false))
@@ -88,8 +86,14 @@ export class HttpService {
 
     return pokemons;
   }
+  loadPokemon(id: string) {
+    this.loading$.next(true);
+    return this.http
+      .get<Pokemon>("https://pokeapi.co/api/v2/pokemon/" + id + "/")
+      .pipe(finalize(() => this.loading$.next(false)));
+  }
 
-  private updateItems(data: Pokemon[]): void {
+  updateItems(data: Pokemon[]): void {
     this.pokemons$.next(data);
   }
   getItems(): Pokemon[] {

@@ -4,7 +4,7 @@ import {
   FormControl,
   NG_VALUE_ACCESSOR,
 } from "@angular/forms";
-import { debounceTime, Subscription } from "rxjs";
+import { debounceTime, of, Subscription } from "rxjs";
 
 @Component({
   selector: "app-input",
@@ -18,12 +18,10 @@ import { debounceTime, Subscription } from "rxjs";
     },
   ],
 })
-export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class InputComponent implements ControlValueAccessor {
   @Input() type!: string;
   value = "";
   subscription!: Subscription;
-
-  input = new FormControl("");
 
   onChange = (value: any) => {};
 
@@ -51,13 +49,5 @@ export class InputComponent implements ControlValueAccessor, OnInit, OnDestroy {
       this.onTouched();
       this.touched = true;
     }
-  }
-  ngOnInit(): void {
-    this.subscription = this.input.valueChanges
-      .pipe(debounceTime(500))
-      .subscribe((value) => this.onChange(value));
-  }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }

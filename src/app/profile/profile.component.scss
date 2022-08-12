@@ -1,0 +1,35 @@
+@import "../../styles/colors.scss";
+@import "../../styles/typography.scss";
+@import "../../styles/media.scss";
+:host {
+}
+.profile {
+  &__content {
+    display: flex;
+  }
+  &__box {
+    width: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &_right {
+      padding-bottom: 700px;
+    }
+  }
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    height: 100%;
+  }
+  &__title {
+    @extend .title__huge;
+  }
+  &__text {
+    @extend .text__main;
+  }
+}

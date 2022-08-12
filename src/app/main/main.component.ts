@@ -19,38 +19,38 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.httpService
-      .loadPokemons(this.api + this.currentOffset)
+      .loadPokemonsArray(this.api + this.currentOffset)
       .pipe(take(1))
-      .subscribe();
-    let subscription2 = this.pokemons$
-      .pipe()
-      .subscribe((value) => console.log(value));
-    this.subscriptions.push(subscription2);
+      .subscribe((value) => this.pokemons$.next(value));
+    // let subscription2 = this.pokemons$
+    //   .pipe()
+    //   .subscribe((value) => console.log(value));
+    // this.subscriptions.push(subscription2);
   }
 
-  public onGoTo(page: number): void {
+  onGoTo(page: number): void {
     this.currentPage = page;
     this.currentOffset = 20 * (page - 1);
     this.httpService
-      .loadPokemons(this.api + this.currentOffset)
+      .loadPokemonsArray(this.api + this.currentOffset)
       .pipe(take(1))
-      .subscribe();
+      .subscribe((value) => this.pokemons$.next(value));
   }
-  public onNext(page: number): void {
+  onNext(page: number): void {
     this.currentPage = page + 1;
     this.currentOffset = this.currentOffset + 20;
     this.httpService
-      .loadPokemons(this.api + this.currentOffset)
+      .loadPokemonsArray(this.api + this.currentOffset)
       .pipe(take(1))
-      .subscribe();
+      .subscribe((value) => this.pokemons$.next(value));
   }
-  public onPrevious(page: number): void {
+  onPrevious(page: number): void {
     this.currentPage = page - 1;
     this.currentOffset = this.currentOffset - 20;
     this.httpService
-      .loadPokemons(this.api + this.currentOffset)
+      .loadPokemonsArray(this.api + this.currentOffset)
       .pipe(take(1))
-      .subscribe();
+      .subscribe((value) => this.pokemons$.next(value));
   }
 
   ngOnDestroy(): void {

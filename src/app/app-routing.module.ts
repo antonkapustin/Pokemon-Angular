@@ -22,11 +22,16 @@ const routes: Routes = [
       ),
   },
   {
-    path: "pokemon/:name",
+    path: "pokemon/:id",
     loadChildren: () =>
       import("./pokemon-page/pokemon-page.module").then(
         (m) => m.PokemonPageModule
       ),
+  },
+  {
+    path: "profile",
+    loadChildren: () =>
+      import("./profile/profile.module").then((m) => m.ProfileModule),
   },
 ];
 
