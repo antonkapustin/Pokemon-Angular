@@ -1,4 +1,16 @@
-<input type="search" class="header__search" />
+<input
+  type="search"
+  #searchInput
+  class="header__search"
+  (input)="search(searchInput.value)"
+/>
+<ul class="header__searchResult">
+  <li class="header__search-item" *ngFor="let item of pokemons$ | async">
+    <a routerLink="/detail/{{ item.id }}" class="header__link">
+      {{ item.name }}
+    </a>
+  </li>
+</ul>
 <label class="header__label">
   <input type="checkbox" class="header__checkbox" />
   <div class="header__box">

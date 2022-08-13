@@ -1,11 +1,26 @@
 <app-header></app-header>
 <div class="profile__content">
-  <div class="profile__box profile__box_left">
+  <div class="profile__box profile__box_right">
+    <div class="profile__img-box profile__img-box_photo">
+      <img
+        [src]="'../../assets/' + trainer.gender + '.png'"
+        alt="trainer"
+        class="profile__img"
+      />
+    </div>
+
     <span class="profile__title">{{ trainer.name }}</span>
     <span class="profile__text">{{ trainer.email }}</span>
+  </div>
+  <div class="profile__box profile__box_left">
+    <span class="profile__title_small">My Pokedex</span>
     <div class="profile__pokemons">
-      <div class="pofile__pokemon-box" *ngFor="let item of pokemons$ | async">
-        <div class="profile__img-box type_{{ item.types[0].type.name }}">
+      <div
+        class="profile__pokemon-box type_{{ item.types[0].type.name }}"
+        *ngFor="let item of pokemons$ | async"
+        [routerLink]="['/pokemon', item.id]"
+      >
+        <div class="profile__img-box">
           <img
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{{
               item.id
@@ -14,10 +29,8 @@
             class="profile__img"
           />
         </div>
-        <div class="profile__box">
-          <span class="profile__title profile__title_small">{{
-            item.name
-          }}</span>
+        <div class="profile__pokemon-discription">
+          <span class="profile__title_small">{{ item.name }}</span>
           <ul class="profile__list">
             <li class="profile__list-item" *ngFor="let item of item.types">
               <span class="profile__text_list">{{ item.type.name }}</span>
@@ -26,12 +39,5 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="profile__box profile__box_right">
-    <img
-      [src]="'../../assets/' + trainer.gender + '.png'"
-      alt="trainer"
-      class="profile__img"
-    />
   </div>
 </div>

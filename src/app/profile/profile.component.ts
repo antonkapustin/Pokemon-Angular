@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { AuthService } from "../services/authorization/auth.service";
 import { Pokemon } from "../services/http/http.service";
@@ -24,5 +24,7 @@ export class ProfileComponent implements OnInit {
     private pokedexService: PokedexService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.pokedexService.setToken(this.pokemons$.getValue());
+  }
 }

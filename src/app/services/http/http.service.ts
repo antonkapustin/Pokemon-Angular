@@ -107,6 +107,15 @@ export class HttpService {
     return this.loading$;
   }
 
+  searchPokemon(item: string) {
+    if (!item.trim()) {
+      return of([]);
+    }
+    return this.http
+      .get<Pokemon[]>(" https://pokeapi.co/api/v2/pokemon/" + item + "/")
+      .pipe(catchError(this.handleError<Pokemon[]>("searchPokemon", [])));
+  }
+
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

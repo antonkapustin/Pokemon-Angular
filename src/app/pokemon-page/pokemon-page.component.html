@@ -8,9 +8,23 @@
       <button class="pokemon__button" type="button" (click)="onNavigateBack()">
         <span class="pokemon__text">Back</span>
       </button>
-      <button class="pokemon__button" type="button" (click)="addToPokedex()">
+      <button
+        class="pokemon__button"
+        type="button"
+        (click)="addToPokedex()"
+        *ngIf="!added; else remove"
+      >
         <span class="pokemon__text">Add to Pokedex</span>
       </button>
+      <ng-template #remove>
+        <button
+          class="pokemon__button"
+          type="button"
+          (click)="removeFromPokedex()"
+        >
+          <span class="pokemon__text">Remove from Pokedex</span>
+        </button>
+      </ng-template>
     </div>
     <div class="pokemon__box pokemon__container">
       <div class="pokemon__discription">

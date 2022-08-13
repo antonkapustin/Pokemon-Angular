@@ -23,6 +23,7 @@ const routes: Routes = [
   },
   {
     path: "pokemon/:id",
+    canActivate: [CanActivateGuard],
     loadChildren: () =>
       import("./pokemon-page/pokemon-page.module").then(
         (m) => m.PokemonPageModule
@@ -30,6 +31,7 @@ const routes: Routes = [
   },
   {
     path: "profile",
+    canActivate: [CanActivateGuard],
     loadChildren: () =>
       import("./profile/profile.module").then((m) => m.ProfileModule),
   },

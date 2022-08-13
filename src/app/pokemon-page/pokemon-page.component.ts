@@ -14,6 +14,7 @@ export class PokemonPageComponent implements OnInit {
   pokemons$: BehaviorSubject<Pokemon[]> = this.httpService.getItems$();
   pokemon!: Pokemon;
   loading$: BehaviorSubject<boolean> = this.httpService.getLoadingState();
+  added = true;
   constructor(
     private httpService: HttpService,
     private router: ActivatedRoute,
@@ -23,6 +24,7 @@ export class PokemonPageComponent implements OnInit {
 
   ngOnInit(): void {
     let id = this.router.snapshot.params["id"];
+    this.added = this.pokedex.isAdded(id);
     this.httpService
       .loadPokemon(id)
       .subscribe((value) => (this.pokemon = value));
@@ -32,5 +34,10 @@ export class PokemonPageComponent implements OnInit {
   }
   addToPokedex() {
     this.pokedex.addPokemons(this.pokemon);
+    this.added = true;
+  }
+  removeFromPokedex() {
+    this.pokedex.removeFromPokedex(this.pokemon);
+    this.added = false;
   }
 }
