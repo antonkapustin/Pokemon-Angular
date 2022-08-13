@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit(): void {
     this.pokemons$ = this.searchTerm.pipe(
-      debounceTime(500),
+      debounceTime(1000),
       distinctUntilChanged(),
       switchMap((term: string) => {
         return this.httpService.searchPokemon(term);

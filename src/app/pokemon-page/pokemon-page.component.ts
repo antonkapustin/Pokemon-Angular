@@ -23,10 +23,10 @@ export class PokemonPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    let id = this.router.snapshot.params["id"];
-    this.added = this.pokedex.isAdded(id);
+    let name = this.router.snapshot.params["name"];
+    this.added = this.pokedex.isAdded(name);
     this.httpService
-      .loadPokemon(id)
+      .loadPokemon(name)
       .subscribe((value) => (this.pokemon = value));
   }
   onNavigateBack() {

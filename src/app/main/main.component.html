@@ -7,7 +7,7 @@
     <li
       class="main__list-item type_{{ item.types[0].type.name }}"
       *ngFor="let item of pokemons$ | async"
-      [routerLink]="['/pokemon', item.id]"
+      [routerLink]="['/pokemon', item.name]"
     >
       <div class="main__img-box">
         <img

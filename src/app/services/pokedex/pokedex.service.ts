@@ -28,9 +28,9 @@ export class PokedexService {
       return [];
     }
   }
-  isAdded(id: string) {
+  isAdded(name: string) {
     let a = this.pokemons$.getValue().find((item) => {
-      return item.id == id;
+      return item.name == name;
     });
     return a !== undefined;
   }

@@ -22,7 +22,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: "pokemon/:id",
+    path: "pokemon/:name",
     canActivate: [CanActivateGuard],
     loadChildren: () =>
       import("./pokemon-page/pokemon-page.module").then(
