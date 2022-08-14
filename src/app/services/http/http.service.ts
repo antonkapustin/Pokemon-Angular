@@ -55,11 +55,15 @@ export interface Pokemon {
   };
 }
 
-interface api {
+export interface api {
   count: number;
   next: string;
   privious: string;
-  results: { name: string; url: string }[];
+  results: results[];
+}
+export interface results {
+  name: string;
+  url: string;
 }
 
 @Injectable({

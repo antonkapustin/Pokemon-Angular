@@ -2,7 +2,7 @@
   type="search"
   #searchInput
   class="header__search"
-  (input)="search(searchInput.value)"
+  placeholder="Enter pokemon's name"
 />
 <ul class="header__searchResult">
   <li class="header__search-item" *ngFor="let item of pokemons$ | async">
