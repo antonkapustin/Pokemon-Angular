@@ -1,13 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import {
-  BehaviorSubject,
-  debounceTime,
-  finalize,
-  map,
-  Subscription,
-  switchMap,
-  take,
-} from "rxjs";
+import { BehaviorSubject, finalize, Subscription, switchMap } from "rxjs";
 import { api, HttpService, Pokemon } from "../services/http/http.service";
 
 @Component({
@@ -22,39 +14,45 @@ export class MainComponent implements OnInit, OnDestroy {
   currentPage: number = 1;
   totalPages: number = 50;
   private api: string = " https://pokeapi.co/api/v2/pokemon?limit=20&offset=";
-  currentOffset = 0;
+  start = 0;
   constructor(private httpService: HttpService) {}
   subscriptions: Subscription[] = [];
 
   ngOnInit(): void {
     this.loadPokemons();
-    // let subscription2 = this.pokemons$
-    //   .pipe()
-    //   .subscribe((value) => console.log(value));
-    // this.subscriptions.push(subscription2);
   }
 
   loadPokemons() {
+    this.loading$.next(true);
+    let end = this.start + 20;
     let subsctiprion1 = this.httpService
-      .loadPokemonsArray(this.api + this.currentOffset)
-      .pipe(take(1))
-      .subscribe((value) => this.pokemons$.next(value));
+      .loadPokemonsArray()
+      .pipe(
+        switchMap((response) => {
+          let items = response.results.slice(this.start, end);
+          return this.httpService.loadPokemonsDetails(items);
+        }),
+        finalize(() => this.loading$.next(false))
+      )
+      .subscribe((value) => {
+        this.renderedPokemon = value as Pokemon[];
+      });
     this.subscriptions.push(subsctiprion1);
   }
 
   onGoTo(page: number): void {
     this.currentPage = page;
-    this.currentOffset = 20 * (page - 1);
+    this.start = 20 * (page - 1);
     this.loadPokemons();
   }
   onNext(page: number): void {
     this.currentPage = page + 1;
-    this.currentOffset = this.currentOffset + 20;
+    this.start = this.start + 20;
     this.loadPokemons();
   }
   onPrevious(page: number): void {
     this.currentPage = page - 1;
-    this.currentOffset = this.currentOffset - 20;
+    this.start = this.start - 20;
     this.loadPokemons();
   }
 

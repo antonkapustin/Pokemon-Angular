@@ -72,23 +72,22 @@ export interface results {
 export class HttpService {
   pokemons$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private api: string =
+    " https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
 
   constructor(private http: HttpClient) {}
 
-  loadPokemonsArray(api: string): Observable<any> {
-    this.loading$.next(true);
-    const pokemons = this.http.get<api>(api).pipe(
-      switchMap((response: api) => {
-        const observ = response.results.map((value) => {
-          return this.http.get(value.url);
-        });
-        return forkJoin(observ);
-      }),
-      catchError(this.handleError<api>("getApi")),
-      finalize(() => this.loading$.next(false))
-    );
-
+  loadPokemonsArray(): Observable<any> {
+    const pokemons = this.http
+      .get<api>(this.api)
+      .pipe(catchError(this.handleError<api>("getApi")));
     return pokemons;
+  }
+  loadPokemonsDetails(data: results[]) {
+    const observ = data.map((value) => {
+      return this.http.get(value.url);
+    });
+    return forkJoin(observ);
   }
   loadPokemon(id: string) {
     this.loading$.next(true);
