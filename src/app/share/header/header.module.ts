@@ -6,7 +6,7 @@ import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [HeaderComponent],
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   exports: [HeaderComponent],
 })
 export class HeaderModule {}

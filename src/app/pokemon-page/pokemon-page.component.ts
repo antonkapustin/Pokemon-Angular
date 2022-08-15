@@ -11,7 +11,6 @@ import { PokedexService } from "../services/pokedex/pokedex.service";
   styleUrls: ["./pokemon-page.component.scss"],
 })
 export class PokemonPageComponent implements OnInit {
-  pokemons$: BehaviorSubject<Pokemon[]> = this.httpService.getItems$();
   pokemon!: Pokemon;
   loading$: BehaviorSubject<boolean> = this.httpService.getLoadingState();
   added = true;

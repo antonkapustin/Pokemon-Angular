@@ -10,6 +10,7 @@ import {
   Observable,
   of,
   switchMap,
+  tap,
 } from "rxjs";
 
 export interface Pokemon {
@@ -70,7 +71,7 @@ export interface results {
   providedIn: "root",
 })
 export class HttpService {
-  pokemons$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  allPokemons$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private api: string =
     " https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
@@ -78,17 +79,22 @@ export class HttpService {
   constructor(private http: HttpClient) {}
 
   loadPokemonsArray(): Observable<any> {
-    const pokemons = this.http
-      .get<api>(this.api)
-      .pipe(catchError(this.handleError<api>("getApi")));
+    const pokemons = this.http.get<api>(this.api).pipe(
+      tap((value: api) => {
+        this.allPokemons$.next(value.results);
+      }),
+      catchError(this.handleError<api>("getApi"))
+    );
     return pokemons;
   }
+
   loadPokemonsDetails(data: results[]) {
     const observ = data.map((value) => {
       return this.http.get(value.url);
     });
     return forkJoin(observ);
   }
+
   loadPokemon(id: string) {
     this.loading$.next(true);
     return this.http
@@ -97,26 +103,24 @@ export class HttpService {
   }
 
   updateItems(data: Pokemon[]): void {
-    this.pokemons$.next(data);
+    this.allPokemons$.next(data);
   }
-  getItems(): Pokemon[] {
-    return this.pokemons$.getValue();
+  getAllItems(): Pokemon[] {
+    return this.allPokemons$.getValue();
   }
 
-  getItems$(): BehaviorSubject<Pokemon[]> {
-    return this.pokemons$;
+  getAllItems$(): BehaviorSubject<Pokemon[]> {
+    return this.allPokemons$;
   }
   getLoadingState(): BehaviorSubject<boolean> {
     return this.loading$;
   }
 
-  searchPokemon(item: string) {
-    if (!item.trim()) {
-      return of([]);
-    }
-    return this.http
-      .get<Pokemon[]>(" https://pokeapi.co/api/v2/pokemon/" + item + "/")
-      .pipe(catchError(this.handleError<Pokemon[]>("searchPokemon", [])));
+  searchPokemon(value: string) {
+    let items = this.allPokemons$.getValue().filter((el) => {
+      return el.name.toUpperCase().trim().indexOf(value.toUpperCase()) === 0;
+    });
+    this.allPokemons$.next(items);
   }
 
   private handleError<T>(operation = "operation", result?: T) {
