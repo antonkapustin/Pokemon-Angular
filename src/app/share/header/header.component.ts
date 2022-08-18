@@ -24,5 +24,6 @@ export class HeaderComponent {
   }
   onLogOut() {
     localStorage.removeItem("auth");
+    this.router.navigate(["/login"]);
   }
 }
