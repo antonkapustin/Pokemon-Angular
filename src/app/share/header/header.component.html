@@ -1,11 +1,20 @@
-<input
-  type="search"
-  #searchInput
-  class="header__search"
-  placeholder="Enter pokemon's name"
-  [(ngModel)]="search"
-  (ngModelChange)="searchChange(searchInput.value)"
-/>
+<label class="header__label">
+  <input
+    type="search"
+    #searchInput
+    class="header__search"
+    placeholder="Enter pokemon's name"
+    [(ngModel)]="search"
+    (ngModelChange)="searchChange(searchInput.value)"
+  />
+  <ul class="header__list" [class.header__list_search]="isOpen">
+    <li class="header__list-item" *ngFor="let item of sortedPokemons$ | async">
+      <a class="header__link" [routerLink]="['/pokemon', item.name]">{{
+        item.name | titlecase
+      }}</a>
+    </li>
+  </ul>
+</label>
 
 <label class="header__label">
   <input type="checkbox" class="header__checkbox" />
@@ -22,7 +31,7 @@
       <a class="header__link" routerLink="/profile">My Profile</a>
     </li>
     <li class="header__list-item">
-      <button class="header__button" type="button">
+      <button class="header__button" type="button" (click)="onLogOut()">
         <span class="header__text">LogOut</span>
       </button>
     </li>

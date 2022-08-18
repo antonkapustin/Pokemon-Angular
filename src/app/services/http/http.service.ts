@@ -72,6 +72,7 @@ export interface results {
 })
 export class HttpService {
   allPokemons$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  sortedPokemons$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private api: string =
     " https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
@@ -112,6 +113,9 @@ export class HttpService {
   getAllItems$(): BehaviorSubject<Pokemon[]> {
     return this.allPokemons$;
   }
+  getSortedPokemons(): BehaviorSubject<Pokemon[]> {
+    return this.sortedPokemons$;
+  }
   getLoadingState(): BehaviorSubject<boolean> {
     return this.loading$;
   }
@@ -120,7 +124,7 @@ export class HttpService {
     let items = this.allPokemons$.getValue().filter((el) => {
       return el.name.toUpperCase().trim().indexOf(value.toUpperCase()) === 0;
     });
-    this.allPokemons$.next(items);
+    this.sortedPokemons$.next(items);
   }
 
   private handleError<T>(operation = "operation", result?: T) {

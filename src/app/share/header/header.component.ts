@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { debounceTime, of } from "rxjs";
-import { HttpService } from "src/app/services/http/http.service";
+import { Router } from "@angular/router";
+import { BehaviorSubject, debounceTime, distinctUntilChanged, of } from "rxjs";
+import { HttpService, Pokemon } from "src/app/services/http/http.service";
 
 @Component({
   selector: "app-header",
@@ -8,11 +9,20 @@ import { HttpService } from "src/app/services/http/http.service";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent {
+  isOpen = false;
+  sortedPokemons$: BehaviorSubject<Pokemon[]> =
+    this.httpService.getSortedPokemons();
   search!: string;
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService, private router: Router) {}
   searchChange(value: string) {
-    of(value)
-      .pipe(debounceTime(500))
-      .subscribe((value) => this.httpService.searchPokemon(value));
+    if (value) {
+      this.isOpen = true;
+      this.httpService.searchPokemon(value);
+    } else {
+      this.isOpen = false;
+    }
+  }
+  onLogOut() {
+    localStorage.removeItem("auth");
   }
 }
