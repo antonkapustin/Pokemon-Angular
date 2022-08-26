@@ -1,1 +1,75 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./styles/colors.scss";
+@import "./styles/mixins.scss";
+@import "./styles/typography.scss";
+@import "./styles/media.scss";
+
+html,
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  background-color: $color-gray;
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  height: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  outline: 0;
+  outline-offset: 0;
+  border: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.type {
+  &_fire {
+    background-color: $color-orange !important;
+  }
+  &_water {
+    background-color: $color-blue2 !important;
+  }
+  &_grass {
+    background-color: $color-green !important;
+  }
+  &_bug {
+    background-color: $color-green !important;
+  }
+  &_electric {
+    background-color: $color-yellow !important;
+  }
+  &_poison {
+    background-color: $color-purple !important;
+  }
+  &_ground {
+    background-color: $color-broune !important;
+  }
+}

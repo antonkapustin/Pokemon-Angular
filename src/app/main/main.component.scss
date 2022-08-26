@@ -1,0 +1,86 @@
+@import "../../styles/colors.scss";
+@import "../../styles/typography.scss";
+@import "../../styles/media.scss";
+
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main {
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 41px;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+    padding: 0px 15px;
+    margin-top: 10px;
+
+    @include media-medium {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include media-extra-large {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  &__list-item {
+    display: flex;
+    align-items: center;
+    background-color: $color-lightgray;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  &__img-box {
+    position: relative;
+    padding-bottom: 180px;
+    width: 50%;
+    @include media-large {
+      padding-bottom: 250px;
+    }
+  }
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  &__box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
+    @include media-medium {
+      align-items: center;
+    }
+  }
+  &__title {
+    @extend .title__main;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+  }
+  &__sublist {
+    display: flex;
+    flex-direction: column;
+    @include media-medium {
+      flex-direction: row;
+    }
+  }
+  &__sublist-item {
+    border: 1px solid $color-white;
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-right: 15px;
+    margin-bottom: 10px;
+  }
+  &__text {
+    @extend .text__main;
+  }
+}

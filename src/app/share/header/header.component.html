@@ -1,0 +1,39 @@
+<label class="header__label">
+  <input
+    type="search"
+    #searchInput
+    class="header__search"
+    placeholder="Enter pokemon's name"
+    [(ngModel)]="search"
+    (ngModelChange)="searchChange(searchInput.value)"
+  />
+  <ul class="header__list" [class.header__list_search]="isOpen">
+    <li class="header__list-item" *ngFor="let item of sortedPokemons$ | async">
+      <a class="header__link" [routerLink]="['/pokemon', item.name]">{{
+        item.name | titlecase
+      }}</a>
+    </li>
+  </ul>
+</label>
+
+<label class="header__label">
+  <input type="checkbox" class="header__checkbox" />
+  <div class="header__box">
+    <span class="header__line header__line_1"></span>
+    <span class="header__line header__line_2"></span>
+    <span class="header__line header__line_3"></span>
+  </div>
+  <ul class="header__list">
+    <li class="header__list-item">
+      <a class="header__link" routerLink="/main">Home</a>
+    </li>
+    <li class="header__list-item">
+      <a class="header__link" routerLink="/profile">My Profile</a>
+    </li>
+    <li class="header__list-item">
+      <button class="header__button" type="button" (click)="onLogOut()">
+        <span class="header__text">LogOut</span>
+      </button>
+    </li>
+  </ul>
+</label>

@@ -1,0 +1,76 @@
+@import "../../styles/colors.scss";
+@import "../../styles/typography.scss";
+@import "../../styles/media.scss";
+
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signUp {
+  &__box {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: $color-white;
+    overflow: hidden;
+
+    @include media-medium {
+      width: 500px;
+      border-radius: 10px;
+      padding: 55px;
+      height: unset;
+    }
+  }
+  &__form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+  }
+  &__title {
+    @extend .title__main;
+    padding-bottom: 30px;
+    color: $color-black;
+  }
+  &__button {
+    height: 60px;
+    margin-top: 20px;
+    margin-bottom: 45px;
+    background-color: $color-blue;
+    color: $color-white;
+    transition: all 0.4s;
+    cursor: pointer;
+    &:focus {
+      background-color: $color-black;
+    }
+    &:disabled {
+      filter: opacity(0.5);
+    }
+  }
+  &__text {
+    padding-bottom: 4px;
+    color: $color-black;
+    &_form {
+      color: $color-red;
+    }
+  }
+  &__link {
+    color: $color-blue;
+  }
+  &__invalid-box {
+    padding: 10px 0;
+  }
+  &__label {
+    margin-top: 20px;
+  }
+  &__gender {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px 0;
+  }
+}

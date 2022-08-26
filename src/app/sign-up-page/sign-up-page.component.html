@@ -1,0 +1,82 @@
+<div class="signUp__box">
+  <form class="signUp__form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <span class="signUp__title">Sign Up</span>
+    <app-input
+      type="name"
+      class="signUp__form-element"
+      formControlName="name"
+    ></app-input>
+    <div class="signUp__invalid-box" *ngIf="signUpForm.get('name')?.invalid">
+      <span class="signUp__text signUp__text_form">Should not be empty</span>
+    </div>
+    <div class="signUp__gender">
+      <label class="signUp__label">
+        <input
+          type="radio"
+          name="gender"
+          value="male"
+          formControlName="gender"
+        />
+        <span
+          class="signUp__text"
+          [class.signUp__text_form]="signUpForm.get('gender')?.invalid"
+          >Male</span
+        >
+      </label>
+      <label class="signUp__label">
+        <input
+          type="radio"
+          name="gender"
+          value="female"
+          formControlName="gender"
+        />
+        <span
+          class="signUp__text"
+          [class.signUp__text_form]="signUpForm.get('gender')?.invalid"
+          >Female</span
+        >
+      </label>
+    </div>
+    <app-input
+      type="email"
+      class="signUp__form-element"
+      formControlName="email"
+    ></app-input>
+    <div class="signUp__invalid-box" *ngIf="signUpForm.get('email')?.invalid">
+      <span class="signUp__text signUp__text_form"
+        >Valid email is required:ex@abc.abc</span
+      >
+    </div>
+    <app-input
+      type="password"
+      class="signUp__form-element"
+      formControlName="password"
+    ></app-input>
+    <div
+      class="signUp__invalid-box"
+      *ngIf="signUpForm.get('password')?.invalid"
+    >
+      <span class="signUp__text signUp__text_form"
+        >Valid password must be at least 8 characters long, contain one
+        lowercase, one uppercase, one number and one special character, do not
+        have whitespaces</span
+      >
+    </div>
+    <label class="signUp__label">
+      <input type="checkbox" class="signUp__checkbox" formControlName="terms" />
+      <span
+        class="signUp__text"
+        [class.signUp__text_form]="signUpForm.get('terms')?.invalid"
+        >I agree all statements in
+        <a href="#" class="signUp__link">Terms of service</a></span
+      >
+    </label>
+    <button
+      type="submit"
+      class="signUp__button"
+      [disabled]="signUpForm.invalid"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>

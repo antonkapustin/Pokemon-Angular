@@ -1,0 +1,35 @@
+@import "../../../../styles/colors.scss";
+@import "../../../../styles/typography.scss";
+@import "../../../../styles/media.scss";
+
+:host {
+  background-color: $color-black;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: opacity(0.9);
+}
+
+.alert {
+  &__box {
+    text-align: center;
+    background: $color-white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include media-medium {
+      padding: 40px;
+      border-radius: 20px;
+    }
+  }
+  &__text {
+    text-transform: uppercase;
+    @extend .title__main;
+  }
+}

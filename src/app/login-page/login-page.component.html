@@ -1,0 +1,41 @@
+<div class="login__box">
+  <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <span class="login__title">Account Login</span>
+    <app-input
+      type="email"
+      class="login__form-element"
+      formControlName="email"
+    ></app-input>
+    <div class="login__invalid-box" *ngIf="loginForm.get('email')?.invalid">
+      <span class="login__text login__text_form"
+        >Valid email is required:ex@abc.abc</span
+      >
+    </div>
+    <app-input
+      type="password"
+      class="login__form-element"
+      formControlName="password"
+    ></app-input>
+    <div class="login__invalid-box" *ngIf="loginForm.get('password')?.invalid">
+      <span class="login__text login__text_form">
+        Valid password must be at least 8 characters long, contain one
+        lowercase, one uppercase, one number and one special character, do not
+        have whitespaces</span
+      >
+    </div>
+    <button type="submit" class="login__button" [disabled]="loginForm.invalid">
+      Sign In
+    </button>
+    <span class="login__text"
+      >Forgot <a href="#" class="login__link">Email/ Password</a></span
+    >
+    <span class="login__text"
+      >Create an account?
+      <a routerLink="../signUp" class="login__link">Sign Up</a></span
+    >
+  </form>
+</div>
+
+<ng-container *ngIf="alert">
+  <app-alert [text]="text"></app-alert>
+</ng-container>
